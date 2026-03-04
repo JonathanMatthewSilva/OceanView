@@ -1,0 +1,38 @@
+<%@ page import="com.oceanview.model.User" %>
+<%
+    String ctx = request.getContextPath();
+    User loggedUser = (User) session.getAttribute("user");
+    boolean loggedIn = (loggedUser != null);
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ocean View Resort - Reservation System</title>
+    <link rel="stylesheet" href="<%= ctx %>/assets/style.css">
+</head>
+<body style="background:#1a0000; color:#ffcccc;">
+<div class="app">
+
+    <header class="topbar" style="background:#330000; border-bottom:1px solid #990000; padding:10px 20px;">
+        <div class="topbar-inner" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+            <div class="brand" style="display:flex; align-items:center; gap:12px;">
+                <div class="logo" style="width:40px; height:40px; background:#990000; border-radius:50%;"></div>
+                <div class="brand-title" style="color:#ff9999; font-weight:bold; font-size:1.2rem;">Ocean View Resort</div>
+            </div>
+
+            <% if (loggedIn) { %>
+            <nav class="nav" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:8px;">
+                <a class="<%= request.getRequestURI().endsWith("/dashboard") ? "active":"" %>" href="<%= ctx %>/dashboard" style="color:#ffcccc; padding:6px 12px; background:#660000; border-radius:8px; text-decoration:none;">Dashboard</a>
+                <a class="<%= request.getRequestURI().endsWith("/add-reservation") ? "active":"" %>" href="<%= ctx %>/add-reservation" style="color:#ffcccc; padding:6px 12px; background:#660000; border-radius:8px; text-decoration:none;">Add</a>
+                <a class="<%= request.getRequestURI().endsWith("/view-reservations") ? "active":"" %>" href="<%= ctx %>/view-reservations" style="color:#ffcccc; padding:6px 12px; background:#660000; border-radius:8px; text-decoration:none;">View</a>
+                <a class="<%= request.getRequestURI().endsWith("/search-reservation") ? "active":"" %>" href="<%= ctx %>/search-reservation" style="color:#ffcccc; padding:6px 12px; background:#660000; border-radius:8px; text-decoration:none;">Search</a>
+                <a class="<%= request.getRequestURI().endsWith("/report") ? "active":"" %>" href="<%= ctx %>/report" style="color:#ffcccc; padding:6px 12px; background:#660000; border-radius:8px; text-decoration:none;">Report</a>
+                <a class="btn btn-ghost" href="<%= ctx %>/logout" style="color:#ffcccc; padding:6px 12px; border:1px solid #990000; border-radius:8px; text-decoration:none;">Logout</a>
+            </nav>
+            <% } %>
+        </div>
+    </header>
+
+    <main class="container" style="padding:20px;">
